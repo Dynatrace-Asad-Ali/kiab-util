@@ -43,5 +43,22 @@ kubectl
 
 #### 6. Run post install script
 ```$xslt
+cd kiab-util
 ./postInstall.sh
+```
+
+## Create projects and services in Keptn
+
+### 1. Create a simple project
+```$xslt
+cd ~/kiab-util/examples/onboarding-carts
+```
+```$xslt
+keptn create project sockshop --shipyard=shipyard.yaml
+```
+
+### 2. Create tags in Dynatrace
+### 3. Run keptn evaluation
+```$xslt
+keptn trigger evaluation --project=dynatrace --service=simplenodeservice --stage=quality-gate --timeframe=10m --labels=buildId=1,executionType=manual
 ```
