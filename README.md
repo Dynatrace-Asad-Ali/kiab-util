@@ -97,3 +97,45 @@ keptn configure monitoring dynatrace --project=dynatrace
 keptn trigger evaluation --project=dynatrace --service=helloservice --stage=quality-gate --timeframe=10m --labels=buildId=1,executionType=manual
 ```
 
+## Create multi-stage project
+
+### 1. Import dashboard to Dynatrace
+"KQG;project=dynatrace;service=journeyservice;stage=quality-gate.json"
+
+### 1. Create a simple project
+```$xslt
+cd ~/kiab-util/examples/onboarding-carts
+```
+
+```$xslt
+keptn create project sockshop --shipyard=shipyard.yaml
+```
+
+```$xslt
+keptn onboard service carts --project=sockshop --chart=./carts
+```
+
+```$xslt
+keptn add-resource --project=sockshop --stage=dev --service=carts --resource=jmeter/basiccheck.jmx --resourceUri=jmeter/basiccheck.jmx
+```
+
+```$xslt
+keptn add-resource --project=sockshop --stage=staging --service=carts --resource=jmeter/load.jmx --resourceUri=jmeter/load.jmx
+```
+
+```$xslt
+keptn add-resource --project=sockshop --service=carts --stage=dev --resource=dynatrace.conf.yaml --resourceUri=dynatrace/dynatrace.conf.yaml
+```
+
+```$xslt
+keptn onboard service carts-db --project=sockshop --chart=./carts-db
+```
+
+```$xslt
+keptn configure monitoring dynatrace --project=sockshop
+```
+
+```$xslt
+keptn trigger evaluation --project=dynatrace --service=helloservice --stage=quality-gate --timeframe=10m --labels=buildId=1,executionType=manual
+```
+
