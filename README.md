@@ -54,10 +54,25 @@ cd kiab-util
 
 ### 1. Create a simple project
 ```$xslt
-cd ~/kiab-util/examples/onboarding-carts
+cd ~/kiab-util/examples/hello-service
 ```
+
 ```$xslt
 keptn create project dynatrace --shipyard=shipyard-quality-gates.yaml
+```
+
+```$xslt
+kubectl create -f hello.yaml
+```
+
+```$xslt
+kubectl expose deployment hello-world --type=NodePort --name=example-service
+```
+```$xslt
+kubectl get svc
+```
+```$xslt
+wget http://localhost:<PORT-NUMBER>
 ```
 
 ### 2. Create tags in Dynatrace
