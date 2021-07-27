@@ -83,5 +83,17 @@ b. keptn_service=helloservice
 
 ### 3. Run keptn evaluation
 ```$xslt
+keptn add-resource --project=dynatrace --resource=sli-config-dynatrace.yaml --resourceUri=dynatrace/sli.yaml
+```
+
+```$xslt
+keptn add-resource --project=dynatrace --stage=quality-gate --service=helloservice --resource=slo-quality-gates.yaml --resourceUri=slo.yaml
+```
+```$xslt
+keptn configure monitoring dynatrace --project=dynatrace
+```
+
+```$xslt
 keptn trigger evaluation --project=dynatrace --service=helloservice --stage=quality-gate --timeframe=10m --labels=buildId=1,executionType=manual
 ```
+
