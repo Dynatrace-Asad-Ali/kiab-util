@@ -57,7 +57,7 @@ cd kiab-util
 cd ~/kiab-util/examples/onboarding-carts
 ```
 ```$xslt
-keptn create project sockshop --shipyard=shipyard.yaml
+keptn create project dynatrace --shipyard=shipyard-quality-gates.yaml
 ```
 
 ### 2. Create tags in Dynatrace
