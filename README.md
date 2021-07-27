@@ -2,7 +2,6 @@
 Create Dynatrace API Token with the following permissions:
 ![Image of API V2](https://github.com/Dynatrace-Asad-Ali/keptn-in-a-box/blob/master/images/APIV2.png)
 ![Image of API V1](https://github.com/Dynatrace-Asad-Ali/keptn-in-a-box/blob/master/images/APIV1.png)
-### Run it in an available machine  (manually)
 
 ## Kept-in-a-box Installation
 #### 1. Log in into  your Ubuntu image
