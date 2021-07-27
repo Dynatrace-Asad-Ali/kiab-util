@@ -12,15 +12,13 @@ git clone https://github.com/Dynatrace-Asad-Ali/kiab-util.git
 cd kiab-util
 ```
 
-#### 2. Download few shell scripts
+#### 2. Change permissions
 
 ```$xslt
-curl -O https://raw.githubusercontent.com/Dynatrace-Asad-Ali/keptn-in-a-box/master/install.sh
 chmod +x install.sh
 ```
 
 ```$xslt
-curl -O https://raw.githubusercontent.com/Dynatrace-Asad-Ali/keptn-in-a-box/master/keptn-in-a-box.sh
 chmod +x keptn-in-a-box.sh
 ```
 
