@@ -78,6 +78,7 @@ wget http://localhost:<PORT-NUMBER>
 ### 2. Create tags in Dynatrace
 #### Add 2 tags to the Hello-Service
 a. keptn_managed
+
 b. keptn_service=helloservice
 
 ### 3. Run keptn evaluation
