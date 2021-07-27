@@ -102,7 +102,7 @@ keptn trigger evaluation --project=dynatrace --service=helloservice --stage=qual
 ### 1. Import dashboard to Dynatrace
 "KQG;project=dynatrace;service=journeyservice;stage=quality-gate.json"
 
-### 1. Create a simple project
+### 2. Create a simple project
 ```$xslt
 cd ~/kiab-util/examples/onboarding-carts
 ```
@@ -135,7 +135,28 @@ keptn onboard service carts-db --project=sockshop --chart=./carts-db
 keptn configure monitoring dynatrace --project=sockshop
 ```
 
+### 3. Trigger Delivery
+
 ```$xslt
-keptn trigger evaluation --project=dynatrace --service=helloservice --stage=quality-gate --timeframe=10m --labels=buildId=1,executionType=manual
+keptn trigger delivery --project=sockshop --service=carts-db --image=docker.io/mongo --tag=4.2.2 --sequence=delivery-direct
+```
+
+```$xslt
+keptn trigger delivery --project=sockshop --service=carts --image=docker.io/keptnexamples/carts --tag=0.12.1
+```
+
+### 4. Generate load
+
+```$xslt
+cd ~/kiab-util/examples/load-generation/cartsloadgen
+```
+
+```$xslt
+kubectl apply -f deploy/cartsloadgen-base.yaml 
+```
+
+### 5. Evaluate
+```$xslt
+keptn trigger evaluation --project=sockshop --service=carts --stage=dev --timeframe=10m --labels=buildId=1,executionType=manual
 ```
 
