@@ -19,6 +19,9 @@ chmod +x install.sh
 ```
 
 ```$xslt
+chmod +x postInstall.sh
+```
+```$xslt
 chmod +x keptn-in-a-box.sh
 ```
 
