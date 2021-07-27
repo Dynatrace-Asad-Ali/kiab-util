@@ -30,16 +30,24 @@ Create Dynatrace API Token with the following permissions:
 ### Run it in an available machine  (manually)
 
 #### 1. Log in into  your Ubuntu image
-#### 2. Clone the repo and navigate to the directory
+#### 2. Download few shell scripts
 
-```bash
+```$xslt
+curl -O https://raw.githubusercontent.com/Dynatrace-Asad-Ali/keptn-in-a-box/master/install.sh
+chmod +x install.sh
+```
+
+```$xslt
 curl -O https://raw.githubusercontent.com/Dynatrace-Asad-Ali/keptn-in-a-box/master/keptn-in-a-box.sh
 chmod +x keptn-in-a-box.sh
 ```
-> You dont need to clone all the repo, only download the **keptn-in-a-box.sh** file. When executing it, it'll take care of the rest and load the resources from github.
 
 #### 3. Execute the file with sudo rights.
-```bash
+```$xslt
+./install.sh
+```
+
+```$xslt
 sudo bash -c './keptn-in-a-box.sh &'
 ```
 And that was it! Yes that easy!  Now if you notice is that there is an & in the command. This command will run installation in a bash shell as sudo, will prompt you for the password and will send the job to the background. You will not see any output since stdout and stderr are piped to a logfile which is located by default in **/tmp/kiab-install.log** 
