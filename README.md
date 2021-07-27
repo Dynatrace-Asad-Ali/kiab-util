@@ -58,7 +58,7 @@ cd ~/kiab-util/examples/hello-service
 ```
 
 ```$xslt
-keptn create project dynatrace --shipyard=shipyard-quality-gates.yaml
+keptn create project dynatrace --shipyard=./shipyard-quality-gates.yaml
 ```
 
 ```$xslt
@@ -76,6 +76,10 @@ wget http://localhost:<PORT-NUMBER>
 ```
 
 ### 2. Create tags in Dynatrace
+#### Add 2 tags to the Hello-Service
+a. keptn_managed
+b. keptn_service=helloservice
+
 ### 3. Run keptn evaluation
 ```$xslt
 keptn trigger evaluation --project=dynatrace --service=simplenodeservice --stage=quality-gate --timeframe=10m --labels=buildId=1,executionType=manual
