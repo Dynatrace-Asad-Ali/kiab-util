@@ -83,5 +83,5 @@ b. keptn_service=helloservice
 
 ### 3. Run keptn evaluation
 ```$xslt
-keptn trigger evaluation --project=dynatrace --service=simplenodeservice --stage=quality-gate --timeframe=10m --labels=buildId=1,executionType=manual
+keptn trigger evaluation --project=dynatrace --service=helloservice --stage=quality-gate --timeframe=10m --labels=buildId=1,executionType=manual
 ```
