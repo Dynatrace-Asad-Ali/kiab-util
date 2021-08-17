@@ -1,0 +1,18 @@
+steps:
+- powershell: |
+   $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+   $headers.Add("x-token", "n1Kvv401C8gqvMCDrmNrBAix6XePWiS7cWv7XfOM8jWp3")
+   $headers.Add("accept", "application/json")
+   $headers.Add("Content-Type", "application/json")
+   
+   $body = "{ `"labels`": { `"buildId`": `"7`", `"executedBy`": `"Azure Pipeline`", `"source`": `"Dynatrace Dashboard`" }, `"timeframe`": `"5m`"}"
+   
+   $response = Invoke-RestMethod 'https://ang10002.cloudautomation.live.dynatrace.com/api/controlPlane/v1/project/asad-ali-azuredevops/stage/dev/service/simplenode/evaluation' -Method 'POST' -Headers $headers -Body $body
+   echo $response
+   $response | ConvertTo-Json
+   echo $response.keptnContext
+   $keptnContext = $response.keptnContext
+   echo $keptnContext
+   Write-Host ("##vso[task.setvariable variable=keptnContext]$keptnContext")
+   
+  displayName: 'Trigger Evaluation'
