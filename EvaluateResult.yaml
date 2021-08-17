@@ -1,0 +1,68 @@
+#Your build pipeline references an undefined variable named ‘keptnContext’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+
+steps:
+- powershell: |
+   $global:DEBUG = $false
+   
+   $global:url = 'https://ang10002.cloudautomation.live.dynatrace.com/api/mongodb-datastore/event?keptnContext=$(keptnContext)&type=sh.keptn.event.evaluation.finished'
+   
+   $headers = @{
+       "Accept" = "application/json"
+       "x-token" = "n1Kvv401C8gqvMCDrmNrBAix6XePWiS7cWv7XfOM8jWp3"
+   }
+   
+   $result = $null
+   $score = -1
+   
+   for ($i=1; $i -le 3; $i++) {
+       # before any attempt we invalidate intermediate results (that may just be partially valid)
+       $result = $null
+       $score = -1
+   
+       if ($global:DEBUG) { Write-Host $global:url }
+   
+       try {
+           $response = Invoke-RestMethod $global:url -Method 'GET' -Headers $headers
+           $numEvents =  $response.events.length
+           if ($numEvents -ge 1 -And $response.totalCount -eq 1) {
+               $evt = $response.events[0].data
+               if ($evt) {
+                   $evaluation = $evt.evaluation
+                   if ($evaluation) {
+                       $result = $evaluation.result
+                       $score = [int]$evaluation.score
+                       if ($result -and $score) {
+                           break    
+                       }                
+                   }
+               }
+           } 
+       } catch {
+           # Dig into the exception to get the Response details.
+           Write-Host "StatusCode:" $_.Exception.Response.StatusCode.value__ 
+           Write-Host "StatusDescription:" $_.Exception.Response.StatusDescription
+       }
+       # Every case where we didn't actually break out of the loop shoud lead to a 10 second break
+       Start-Sleep 10    
+   }
+   
+   if (($null -ne $result) -and ($score -ne -1)) {
+       if ($result -eq "pass" ) {
+           Write-Host "##vso[task.complete result= Succeeded;]Pass"
+       }
+       ElseIf ($result -eq "warning" ) {
+           Write-Host  "##vso[task.LogIssue type=warning;]Evaluation resulted in Warning"
+           Write-Host "##vso[task.complete result= SucceededWithIssues;]Warning"
+       }
+       ElseIf ($result -eq "fail" ) {
+           Write-Host  "##vso[task.LogIssue type=Fail;]Evaluation resulted in Fail"
+           Write-Host "##vso[task.complete result=Failed;]Failed"
+       }
+   
+       Write-Host ("##vso[task.setvariable variable=result;isOutput=true]$result")    
+       Write-Host "result: $result"
+       Write-Host "score: $score"    
+   }
+   
+   
+  displayName: 'Evaluate Result'
